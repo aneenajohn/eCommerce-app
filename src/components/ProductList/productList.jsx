@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 export const ProductList = () => {
   const [productsData, setProductsData] = useState([]);
   useEffect(() => {
@@ -25,6 +26,7 @@ export const ProductList = () => {
               <div class="card__thumbnail">
                 <img src={data.image} class="card__img" alt="cardImg" />
               </div>
+              <i class="fa fa-heart" aria-hidden="true"></i>
               <div class="card__desc">
                 <h1>
                   <strong>{data.name}</strong>
@@ -41,6 +43,10 @@ export const ProductList = () => {
                   <strong>{data.price}</strong>
                 </h2>
                 <p class="card__details">{data.offer}</p>
+                <button className="btn btn--primary btn--cart">
+                  Add to cart {"   "}
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </button>
               </div>
             </div>
           );

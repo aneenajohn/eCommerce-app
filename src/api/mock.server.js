@@ -30,7 +30,7 @@ export default function setupMockServer() {
           fastDelivery: faker.random.boolean(),
           ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
           offer: faker.random.arrayElement([
-            "Save 50",
+            "Save 50%",
             "70% bonanza",
             "Best Seller",
             "Best Deals",

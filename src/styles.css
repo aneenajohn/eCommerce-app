@@ -68,5 +68,25 @@ body {
 
 .fa-star {
   color: var(--ow-font-color);
+  font-size: large;
+}
+
+.btn--cart {
+  margin-top: 0.2rem;
+  float: right;
+}
+
+.fa-heart {
+  position: absolute;
   font-size: medium;
+  left: 85%;
+  margin: 0.4rem;
+  padding: 0.8rem;
+  color: #6b7280;
+  border-radius: 50%;
+  background: #e5e7eb;
+}
+
+.card__details {
+  font-size: small;
 }
