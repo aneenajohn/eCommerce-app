@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useCart } from "../CartContext/cartContext";
 import axios from "axios";
 
 export const ProductList = () => {
   const [productsData, setProductsData] = useState([]);
+  const { cartItems, setCartItems } = useCart();
   useEffect(() => {
     (async function () {
       try {
@@ -22,30 +24,33 @@ export const ProductList = () => {
       {productsData ? (
         productsData.map((data) => {
           return (
-            <div class="card card--display">
-              <div class="card__thumbnail">
-                <img src={data.image} class="card__img" alt="cardImg" />
+            <div className="card card--display">
+              <div className="card__thumbnail">
+                <img src={data.image} className="card__img" alt="cardImg" />
               </div>
-              <i class="fa fa-heart" aria-hidden="true"></i>
-              <div class="card__desc">
+              <i className="fa fa-heart wish-icon" aria-hidden="true"></i>
+              <div className="card__desc">
                 <h1>
                   <strong>{data.name}</strong>
                 </h1>
                 <div className="star-count">
-                  <p class="star-count__star">{data.ratings}</p>
+                  <p className="star-count__star">{data.ratings}</p>
                   <div class="rating">
-                    <div class="rating__stars">
-                      <i class="fa fa-star" aria-hidden="true"></i>
+                    <div className="rating__stars">
+                      <i className="fa fa-star" aria-hidden="true"></i>
                     </div>
                   </div>
                 </div>
                 <h2>
                   <strong>{data.price}</strong>
                 </h2>
-                <p class="card__details">{data.offer}</p>
-                <button className="btn btn--primary btn--cart">
+                <p className="card__details">{data.offer}</p>
+                <button
+                  className="btn btn--primary btn--cart"
+                  onClick={() => setCartItems((items) => [...items, data])}
+                >
                   Add to cart {"   "}
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                 </button>
               </div>
             </div>

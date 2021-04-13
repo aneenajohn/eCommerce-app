@@ -20,7 +20,19 @@ body {
   /* margin: 0rem 2rem 0rem 2rem; */
   margin: 2rem 4rem 2rem 10rem;
 }
+/* Header */
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  background: var(--primary-color);
+  width: 100%;
+}
 
+.wish-header {
+  padding: 1rem;
+}
 /* product Listing */
 .card-container {
   display: grid;
@@ -76,7 +88,7 @@ body {
   float: right;
 }
 
-.fa-heart {
+.wish-icon {
   position: absolute;
   font-size: medium;
   left: 85%;

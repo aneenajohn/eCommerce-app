@@ -1,25 +1,19 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-// import App from './App';
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
-
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import setupMockServer from "./api/mock.server";
 import App from "./App";
+import { CartProvider } from "./components/CartContext/cartContext";
+import { RouteProvider } from "./components/RouteContext";
 
 setupMockServer();
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <App />
+    <CartProvider>
+      <RouteProvider>
+        <App />
+      </RouteProvider>
+    </CartProvider>
   </StrictMode>,
   rootElement
 );
