@@ -20,12 +20,22 @@ export default function setupMockServer() {
     },
 
     seeds(server) {
-      [...Array(50)].forEach((_) => {
+      [...Array(12)].forEach((_) => {
         server.create("product", {
           id: faker.random.uuid(),
           name: faker.commerce.productName(),
           image: faker.random.image(),
-          price: faker.commerce.price()
+          price: faker.commerce.price(),
+          inStock: faker.random.boolean(),
+          fastDelivery: faker.random.boolean(),
+          ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
+          offer: faker.random.arrayElement([
+            "Save 50",
+            "70% bonanza",
+            "Best Seller",
+            "Best Deals",
+            "Upto 40% OFF"
+          ])
         });
       });
     }

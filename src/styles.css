@@ -20,6 +20,8 @@ body {
   /* margin: 0rem 2rem 0rem 2rem; */
   margin: 2rem 4rem 2rem 10rem;
 }
+
+/* product Listing */
 .card-container {
   display: grid;
   margin: 0 auto;
@@ -30,12 +32,6 @@ body {
   height: inherit;
   margin: 1rem;
   width: 315px;
-  /* display: flex;
-  flex-direction: column;
-  
-  width: auto;
-  max-width: 100%;
-  min-width: 200px; */
 }
 
 .card--display {
@@ -50,7 +46,6 @@ body {
 
 .card__img {
   width: 315px;
-  /* height:420px; */
 }
 
 .card__desc {
@@ -66,8 +61,7 @@ body {
   justify-content: space-evenly;
   padding: 0 0.5rem;
   width: 5rem;
-  /* width:20px; */
-  background: var(--primary-color);
+  background: var(--secondary-color);
   color: var(--ow-font-color);
   border-radius: 5px;
 }
