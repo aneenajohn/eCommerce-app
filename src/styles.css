@@ -5,12 +5,74 @@
 body {
   font-family: "Open Sans", sans-serif;
 }
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .app-header {
   text-align: center;
 }
 
-
 .app-body {
-  margin: 0rem 2rem 0rem 2rem;
+  /* margin: 0rem 2rem 0rem 2rem; */
+  margin: 2rem 4rem 2rem 10rem;
+}
+.card-container {
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+.card {
+  height: inherit;
+  margin: 1rem;
+  width: 315px;
+  /* display: flex;
+  flex-direction: column;
+  
+  width: auto;
+  max-width: 100%;
+  min-width: 200px; */
+}
+
+.card--display {
+  display: flex;
+  position: relative;
+  top: 0;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-basis: 30%;
+}
+
+.card__img {
+  width: 315px;
+  /* height:420px; */
+}
+
+.card__desc {
+  width: 315px;
+}
+
+.star-count__star {
+  font-weight: bold;
+  font-size: large;
+}
+.star-count {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 0.5rem;
+  width: 5rem;
+  /* width:20px; */
+  background: var(--primary-color);
+  color: var(--ow-font-color);
+  border-radius: 5px;
+}
+
+.fa-star {
+  color: var(--ow-font-color);
+  font-size: medium;
 }
