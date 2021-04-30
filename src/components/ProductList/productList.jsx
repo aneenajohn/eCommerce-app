@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { useCart } from "../CartContext/cartContext";
 import axios from "axios";
 
 export const ProductList = () => {
   const [productsData, setProductsData] = useState([]);
-  const { cartItems, setCartItems } = useCart();
   useEffect(() => {
     (async function () {
       try {
@@ -45,10 +43,7 @@ export const ProductList = () => {
                   <strong>{data.price}</strong>
                 </h2>
                 <p className="card__details">{data.offer}</p>
-                <button
-                  className="btn btn--primary btn--cart"
-                  onClick={() => setCartItems((items) => [...items, data])}
-                >
+                <button className="btn btn--primary btn--cart">
                   Add to cart {"   "}
                   <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                 </button>
