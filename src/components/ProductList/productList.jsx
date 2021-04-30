@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useCart } from "../cartContext";
 
-export const ProductList = () => {
+export default function ProductList() {
   const [productsData, setProductsData] = useState([]);
+  const { dispatch: cartDispatch } = useCart();
   useEffect(() => {
     (async function () {
       try {
@@ -43,7 +45,12 @@ export const ProductList = () => {
                   <strong>{data.price}</strong>
                 </h2>
                 <p className="card__details">{data.offer}</p>
-                <button className="btn btn--primary btn--cart">
+                <button
+                  className="btn btn--primary btn--cart"
+                  onClick={() =>
+                    cartDispatch({ type: "ADD_TO_CART", payLoad: data })
+                  }
+                >
                   Add to cart {"   "}
                   <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                 </button>
@@ -56,4 +63,4 @@ export const ProductList = () => {
       )}
     </div>
   );
-};
+}
