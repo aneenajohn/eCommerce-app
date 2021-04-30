@@ -1,6 +1,4 @@
-import { useRoute } from "./components/RouteContext";
 export const Header = () => {
-  const { setRoute } = useRoute();
   return (
     <nav class="head">
       <a href="index.html" class="head__logo">
@@ -8,16 +6,12 @@ export const Header = () => {
       </a>
       <ul class="nav__menu">
         <li class="nav__item">
-          <a
-            href="index.html"
-            class="nav__link"
-            onClick={() => setRoute("products")}
-          >
+          <a href="index.html" class="nav__link">
             Home
           </a>
         </li>
         <li class="nav__item">
-          <a href="/" class="nav__link" onClick={() => setRoute("cart")}>
+          <a href="/" class="nav__link">
             <i className="fa fa-shopping-cart" aria-hidden="true"></i> Cart
           </a>
         </li>
