@@ -17,7 +17,6 @@ body {
 }
 
 .app-body {
-  /* margin: 0rem 2rem 0rem 2rem; */
   margin: 2rem 4rem 2rem 10rem;
 }
 /* Header */
@@ -101,4 +100,33 @@ body {
 
 .card__details {
   font-size: small;
+}
+
+/* CART */
+.fa-plus,
+.fa-minus {
+  font-size: large;
+  margin: 0.4rem;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.fa-trash-o {
+  font-size: large;
+  margin-right: 0.2rem;
+  padding-left: 0.3rem;
+  /* margin: 2rem; */
+}
+
+.btn--trash {
+  float: right;
+}
+
+.card__quantity {
+  display: inline;
+  font-size: large;
+  margin: 0.4rem;
+  padding: 0.2rem 1.5rem;
+  border: 1px solid #4b5563;
 }

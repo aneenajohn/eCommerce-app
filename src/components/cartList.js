@@ -1,18 +1,20 @@
 import { useCart } from "./cartContext";
-
+import { Header } from "./header";
 export const Cart = () => {
-  const { itemsInCart } = useCart();
+  const { itemsInCart, dispatch: cartDispatch } = useCart();
 
   return (
     <div>
+      <Header />
       <h1>Cart</h1>
-      {console.log({ itemsInCart })}
+      {console.log("items in cart", { itemsInCart })}
       {itemsInCart.length === 0 ? (
         <div>Ah! Looks like your Cart is empty</div>
       ) : (
         itemsInCart.map(
           ({
             id,
+            quantity,
             name,
             image,
             price,
@@ -21,7 +23,7 @@ export const Cart = () => {
             ratings,
             offer
           }) => (
-            <div className="card card--display">
+            <div className="card card--display" Key={id}>
               <div className="card__thumbnail">
                 <img src={image} className="card__img" alt="cardImg" />
               </div>
@@ -42,6 +44,28 @@ export const Cart = () => {
                   <strong>{price}</strong>
                 </h2>
                 <p className="card__details">{offer}</p>
+                <i
+                  class="fa fa-plus"
+                  aria-hidden="true"
+                  onClick={() =>
+                    cartDispatch({ type: "INCREMENT", payLoad: id })
+                  }
+                ></i>
+                <div className="card__quantity">{quantity}</div>
+                <i
+                  class="fa fa-minus"
+                  aria-hidden="true"
+                  onClick={() =>
+                    cartDispatch({ type: "DECREMENT", payLoad: id })
+                  }
+                ></i>
+                <button
+                  className="btn btn--primary  btn--trash"
+                  onClick={() => cartDispatch({ type: "REMOVE", payLoad: id })}
+                >
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  Remove
+                </button>
               </div>
             </div>
           )

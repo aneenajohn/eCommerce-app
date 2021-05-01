@@ -7,22 +7,20 @@ export const Header = () => {
   console.log(location.state);
   return (
     <nav className="head">
-      <a href="index.html" className="head__logo">
-        Lingokart
-      </a>
+      <Link to="/">
+        <div className="head__logo">Lingokart</div>
+      </Link>
       <ul className="nav__menu">
         <li className="nav__item">
           <Link to="/">
-            <a href="index.html" className="nav__link">
-              Home
-            </a>
+            <div className="nav__link">Home</div>
           </Link>
         </li>
         <li className="nav__item">
           <Link to="/cart" state={{ itemsInCart }}>
-            <a href="/" className="nav__link">
+            <div className="nav__link">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i> Cart
-            </a>
+            </div>
           </Link>
         </li>
         <li className="nav__item">
