@@ -1,18 +1,22 @@
-import { useCart } from "./cartContext";
+import { useWishList } from "./wishContext";
 import { Header } from "./header";
-export const Cart = () => {
-  const { itemsInCart, dispatch: cartDispatch } = useCart();
+import { useState } from "react";
 
+export const WishList = () => {
+  const { wishList, dispatch: wishDispatch } = useWishList();
+  const [isWishSelected, setWishSelected] = useState(false);
+
+  const wishToggle = () => setWishSelected(!isWishSelected);
   return (
     <div>
       <Header />
-      <div className="page__side-bar">Filter</div>
-      <h1 className="page__main">Cart</h1>
-      {console.log("items in cart", { itemsInCart })}
-      {itemsInCart.length === 0 ? (
-        <p className="para--lead">Ah! Looks like your Cart is empty</p>
+      <h1>WishList</h1>
+      {wishList.length === 0 ? (
+        <p className="para--lead">
+          Ahh..Looks like you didn't any items in your wishList{" "}
+        </p>
       ) : (
-        itemsInCart.map(
+        wishList.map(
           ({
             id,
             quantity,
@@ -28,7 +32,14 @@ export const Cart = () => {
               <div className="card__thumbnail">
                 <img src={image} className="card__img" alt="cardImg" />
               </div>
-              <i className="fa fa-heart wish-icon" aria-hidden="true"></i>
+              <i
+                className={
+                  isWishSelected
+                    ? "fa fa-heart wish-icon--selected"
+                    : "fa fa-heart wish-icon"
+                }
+                aria-hidden="true"
+              ></i>
               <div className="card__desc">
                 <h1>
                   <strong>{name}</strong>
@@ -45,26 +56,15 @@ export const Cart = () => {
                   <strong>{price}</strong>
                 </h2>
                 <p className="card__details">{offer}</p>
-                <i
-                  class="fa fa-plus"
-                  aria-hidden="true"
-                  onClick={() =>
-                    cartDispatch({ type: "INCREMENT", payLoad: id })
-                  }
-                ></i>
-                <div className="card__quantity">{quantity}</div>
-                <i
-                  class="fa fa-minus"
-                  aria-hidden="true"
-                  onClick={() =>
-                    cartDispatch({ type: "DECREMENT", payLoad: id })
-                  }
-                ></i>
                 <button
                   className="btn btn--primary  btn--trash"
-                  onClick={() => cartDispatch({ type: "REMOVE", payLoad: id })}
+                  onClick={() => wishDispatch({ type: "REMOVE", payLoad: id })}
                 >
-                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  <i
+                    class="fa fa-trash-o"
+                    aria-hidden="true"
+                    onClick={() => wishToggle()}
+                  ></i>
                   Remove
                 </button>
               </div>

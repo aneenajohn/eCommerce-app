@@ -1,14 +1,16 @@
 import { useCart } from "./cartContext";
 import { Link, useLocation } from "react-router-dom";
+import { useWishList } from "./wishContext";
 
 export const Header = () => {
   const { itemsInCart } = useCart();
+  const { wishList } = useWishList();
   const location = useLocation();
   console.log(location.state);
   return (
     <nav className="head">
       <Link to="/">
-        <div className="head__logo">Lingokart</div>
+        <p className="para--lead">Linguekart</p>
       </Link>
       <ul className="nav__menu">
         <li className="nav__item">
@@ -24,9 +26,11 @@ export const Header = () => {
           </Link>
         </li>
         <li className="nav__item">
-          <a href="/" className="nav__link">
-            <i className="fa fa-heart wish-header" aria-hidden="true"></i>
-          </a>
+          <Link to="/wish-list" state={{ wishList }}>
+            <div className="nav__link">
+              <i className="fa fa-heart wish-header" aria-hidden="true"></i>
+            </div>
+          </Link>
         </li>
       </ul>
     </nav>

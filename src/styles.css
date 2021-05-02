@@ -19,6 +19,7 @@ body {
 .app-body {
   margin: 2rem 4rem 2rem 10rem;
 }
+
 /* Header */
 .head {
   display: flex;
@@ -27,6 +28,7 @@ body {
   height: 5rem;
   background: var(--primary-color);
   width: 100vw;
+  grid-area: header;
 }
 
 .wish-header {
@@ -129,4 +131,9 @@ body {
   margin: 0.4rem;
   padding: 0.2rem 1.5rem;
   border: 1px solid #4b5563;
+}
+
+/* WISHLIST */
+.wish-icon--selected {
+  color: var(--primary-color);
 }
