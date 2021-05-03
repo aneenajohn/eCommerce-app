@@ -6,7 +6,6 @@ export const Cart = () => {
   return (
     <div>
       <Header />
-      <div className="page__side-bar">Filter</div>
       <h1 className="page__main">Cart</h1>
       {console.log("items in cart", { itemsInCart })}
       {itemsInCart.length === 0 ? (
