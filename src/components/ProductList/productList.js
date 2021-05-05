@@ -1,39 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useCart } from "../cartContext";
 import { Header } from "../header";
 import { useWishList } from "../wishContext";
-// import { useProduct } from "./productContext";
+import { useProduct } from "./productContext";
+import { getFilteredData } from "../Filter/filter";
+import { getSortedData } from "../Filter/sort";
 
 export default function ProductList() {
   const [productsData, setProductsData] = useState([]);
   const { dispatch: cartDispatch } = useCart();
   const { dispatch: wishDispatch } = useWishList();
-  // const { products } = useProduct();
-  // const { sortBy, showInventoryAll, showFastDeliveryOnly } = useProduct();
-  // const { dispatch: productDispatch } = useProduct();
+  const { sortBy, showInventoryAll, showFastDeliveryOnly } = useProduct();
+  const { dispatch: productDispatch } = useProduct();
 
-  // const sortedData = getSortedData(data, sortBy);
-  // const filteredData = getFilteredData(
-  //   sortedData,
-  //   showInventoryAll,
-  //   showFastDeliveryOnly
-  // );
-
-  useEffect(() => {
-    (async function () {
-      try {
-        const {
-          data: { products: dataFromServer }
-        } = await axios.get("/api/products");
-        console.log(dataFromServer);
-        setProductsData(dataFromServer);
-      } catch (err) {
-        console.error(`Error happened ${err}`);
-      }
-    })();
-  }, []);
-
+  async function data() {
+    try {
+      const {
+        data: { products: dataFromServer }
+      } = await axios.get("/api/products");
+      console.log(dataFromServer);
+      setProductsData(dataFromServer);
+    } catch (err) {
+      console.error(`Error happened ${err}`);
+    }
+  }
+  data();
+  const sortedData = getSortedData(productsData, sortBy);
+  const filteredData = getFilteredData(
+    sortedData,
+    showInventoryAll,
+    showFastDeliveryOnly
+  );
   return (
     <section className="container">
       <div className="container__head">
@@ -46,10 +44,10 @@ export default function ProductList() {
             <input
               type="radio"
               name="sort"
-              // onChange={() =>
-              //   dispatch({ type: "SORT", payLoad: "PRICE_HIGH_TO_LOW" })
-              // }
-              // checked={sortBy && sortBy === "PRICE_HIGH_TO_LOW"}
+              onChange={() =>
+                productDispatch({ type: "SORT", payLoad: "PRICE_HIGH_TO_LOW" })
+              }
+              checked={sortBy && sortBy === "PRICE_HIGH_TO_LOW"}
             ></input>
             Price - High to low
           </label>
@@ -58,10 +56,10 @@ export default function ProductList() {
             <input
               type="radio"
               name="sort"
-              // onChange={() =>
-              //   dispatch({ type: "SORT", payLoad: "PRICE_LOW_TO_HIGH" })
-              // }
-              // checked={sortBy && sortBy === "PRICE_LOW_TO_HIGH"}
+              onChange={() =>
+                productDispatch({ type: "SORT", payLoad: "PRICE_LOW_TO_HIGH" })
+              }
+              checked={sortBy && sortBy === "PRICE_LOW_TO_HIGH"}
             ></input>
             Price - Low to high
           </label>
@@ -71,8 +69,8 @@ export default function ProductList() {
           <label class="para para--label">
             <input
               type="checkbox"
-              // checked={showInventoryAll}
-              // onChange={() => dispatch({ type: "TOGGLE_INVENTORY" })}
+              checked={showInventoryAll}
+              onChange={() => productDispatch({ type: "TOGGLE_INVENTORY" })}
             ></input>
             Include out of stock
           </label>
@@ -80,18 +78,23 @@ export default function ProductList() {
           <label class="para para--label">
             <input
               type="checkbox"
-              // checked={showFastDeliveryOnly}
-              // onChange={() => dispatch({ type: "TOGGLE_DELIVERY" })}
+              checked={showFastDeliveryOnly}
+              onChange={() => productDispatch({ type: "TOGGLE_DELIVERY" })}
             ></input>
             Only fast Delivery
           </label>
         </fieldset>
-        <div class="btn btn--primary filter">Clear Filter</div>
+        <div
+          class="btn btn--primary filter"
+          onClick={() => productDispatch({ type: "CLEAR_FILTER" })}
+        >
+          Clear Filter
+        </div>
       </div>
       <div className="container__main">
         <div className="card-container">
-          {productsData ? (
-            productsData.map((data) => {
+          {filteredData ? (
+            filteredData.map((data) => {
               return (
                 <div className="card card--display" key={data.id}>
                   <div className="card__thumbnail">
