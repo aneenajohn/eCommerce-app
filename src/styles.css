@@ -27,7 +27,6 @@ body {
   align-items: center;
   height: 5rem;
   background: var(--primary-color);
-  width: 100vw;
   grid-area: header;
 }
 
@@ -40,7 +39,7 @@ body {
   display: grid;
   margin: 0 auto;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  grid-gap: 10px;
 }
 
 .container {
@@ -51,22 +50,28 @@ body {
     "header header"
     "aside main";
   grid-template-rows: 50px 2fr;
-  grid-template-columns: 0.5fr 1fr;
+  grid-template-columns: 150px 2fr;
 }
 
 .container__head {
   grid-area: header;
   position: fixed;
   z-index: 1;
+  width: 100%;
 }
 
 .container__aside {
-  margin-top: 49px;
+  margin-top: 80px;
   grid-area: aside;
   height: calc(100vh - 50px);
   overflow-y: auto;
   overflow-x: clip;
   position: fixed;
+  padding: 1rem;
+}
+
+.para--label {
+  padding: 1rem;
 }
 
 .container__main {
@@ -140,6 +145,10 @@ body {
   font-size: small;
 }
 
+.filter {
+  font-size: medium;
+  margin: 1rem;
+}
 /* CART */
 .fa-plus,
 .fa-minus {

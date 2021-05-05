@@ -1,9 +1,9 @@
 import "./styles.css";
 import { Routes, Route } from "react-router-dom";
-// import ProductList from "./components/ProductList/productList";
+import ProductList from "./components/ProductList/productList";
 import { Cart } from "./components/cartList";
 import { WishList } from "./components/wishlist";
-import ProductList from "./components/Products";
+// import ProductList from "./components/Products";
 
 export default function App() {
   return (

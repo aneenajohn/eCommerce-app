@@ -3,11 +3,23 @@ import axios from "axios";
 import { useCart } from "../cartContext";
 import { Header } from "../header";
 import { useWishList } from "../wishContext";
+// import { useProduct } from "./productContext";
 
 export default function ProductList() {
   const [productsData, setProductsData] = useState([]);
   const { dispatch: cartDispatch } = useCart();
   const { dispatch: wishDispatch } = useWishList();
+  // const { products } = useProduct();
+  // const { sortBy, showInventoryAll, showFastDeliveryOnly } = useProduct();
+  // const { dispatch: productDispatch } = useProduct();
+
+  // const sortedData = getSortedData(data, sortBy);
+  // const filteredData = getFilteredData(
+  //   sortedData,
+  //   showInventoryAll,
+  //   showFastDeliveryOnly
+  // );
+
   useEffect(() => {
     (async function () {
       try {
@@ -28,9 +40,53 @@ export default function ProductList() {
         <Header />
       </div>
       <div className="container__aside">
-        <h1>Filter</h1>
-        <h1>Sort By</h1>
-        <p>Lorem ipsum</p>
+        <fieldset>
+          <legend class="para">Sort By</legend>
+          <label class="para para--label">
+            <input
+              type="radio"
+              name="sort"
+              // onChange={() =>
+              //   dispatch({ type: "SORT", payLoad: "PRICE_HIGH_TO_LOW" })
+              // }
+              // checked={sortBy && sortBy === "PRICE_HIGH_TO_LOW"}
+            ></input>
+            Price - High to low
+          </label>
+          <br />
+          <label class="para para--label">
+            <input
+              type="radio"
+              name="sort"
+              // onChange={() =>
+              //   dispatch({ type: "SORT", payLoad: "PRICE_LOW_TO_HIGH" })
+              // }
+              // checked={sortBy && sortBy === "PRICE_LOW_TO_HIGH"}
+            ></input>
+            Price - Low to high
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend class="para">Availability</legend>
+          <label class="para para--label">
+            <input
+              type="checkbox"
+              // checked={showInventoryAll}
+              // onChange={() => dispatch({ type: "TOGGLE_INVENTORY" })}
+            ></input>
+            Include out of stock
+          </label>
+          <br />
+          <label class="para para--label">
+            <input
+              type="checkbox"
+              // checked={showFastDeliveryOnly}
+              // onChange={() => dispatch({ type: "TOGGLE_DELIVERY" })}
+            ></input>
+            Only fast Delivery
+          </label>
+        </fieldset>
+        <div class="btn btn--primary filter">Clear Filter</div>
       </div>
       <div className="container__main">
         <div className="card-container">
