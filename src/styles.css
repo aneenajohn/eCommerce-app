@@ -51,7 +51,7 @@ body {
     "header header"
     "aside main";
   grid-template-rows: 50px 2fr;
-  grid-template-columns: 2fr 4.5fr;
+  grid-template-columns: 0.5fr 1fr;
 }
 
 .container__head {

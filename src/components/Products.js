@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useCart } from "../cartContext";
-import { Header } from "../header";
-import { useWishList } from "../wishContext";
+import { useCart } from "./cartContext";
+import { Header } from "./header";
+import { useWishList } from "./wishContext";
 
 export default function ProductList() {
   const [productsData, setProductsData] = useState([]);
@@ -29,8 +29,6 @@ export default function ProductList() {
       </div>
       <div className="container__aside">
         <h1>Filter</h1>
-        <h1>Sort By</h1>
-        <p>Lorem ipsum</p>
       </div>
       <div className="container__main">
         <div className="card-container">
