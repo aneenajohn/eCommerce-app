@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useCart } from "../cartContext";
 import { Header } from "../header";
@@ -14,24 +14,27 @@ export default function ProductList() {
   const { sortBy, showInventoryAll, showFastDeliveryOnly } = useProduct();
   const { dispatch: productDispatch } = useProduct();
 
-  async function data() {
-    try {
-      const {
-        data: { products: dataFromServer }
-      } = await axios.get("/api/products");
-      console.log(dataFromServer);
-      setProductsData(dataFromServer);
-    } catch (err) {
-      console.error(`Error happened ${err}`);
-    }
-  }
-  data();
+  useEffect(() => {
+    (async function () {
+      try {
+        const {
+          data: { products: dataFromServer }
+        } = await axios.get("/api/products");
+        console.log(dataFromServer);
+        setProductsData(dataFromServer);
+      } catch (err) {
+        console.error(`Error happened ${err}`);
+      }
+    })();
+  }, []);
+
   const sortedData = getSortedData(productsData, sortBy);
   const filteredData = getFilteredData(
     sortedData,
     showInventoryAll,
     showFastDeliveryOnly
   );
+
   return (
     <section className="container">
       <div className="container__head">
