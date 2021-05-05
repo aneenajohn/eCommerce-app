@@ -146,8 +146,15 @@ body {
 }
 
 .filter {
-  font-size: medium;
+  font-size: smaller;
   margin: 1rem;
+}
+
+.offer {
+  background: orange;
+  color: white;
+  width: fit-content;
+  padding: 0 1rem;
 }
 /* CART */
 .fa-plus,

@@ -125,7 +125,7 @@ export default function ProductList() {
                     <h2>
                       <strong>{data.price}</strong>
                     </h2>
-                    <p className="card__details">{data.offer}</p>
+                    <p className="card__details offer">{data.offer}</p>
                     <button
                       className="btn btn--primary btn--cart"
                       onClick={() =>
