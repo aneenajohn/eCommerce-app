@@ -3,6 +3,8 @@ import { Header } from "./header";
 export const Cart = () => {
   const { itemsInCart, dispatch: cartDispatch } = useCart();
 
+  const totalReducer = () =>
+    itemsInCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   return (
     <div>
       <Header />
@@ -70,6 +72,9 @@ export const Cart = () => {
             </div>
           )
         )
+      )}
+      {itemsInCart.length !== 0 && (
+        <div className="para--lead">Total:{totalReducer()}</div>
       )}
     </div>
   );
