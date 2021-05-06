@@ -10,7 +10,7 @@ export const Header = () => {
   return (
     <nav className="head">
       <Link to="/">
-        <p className="para--lead">Linguekart</p>
+        <p className="para--lead">Lingokart</p>
       </Link>
       <ul className="nav__menu">
         <li className="nav__item">
