@@ -18,6 +18,12 @@ export const productReducer = (state, action) => {
         showInventoryAll: false,
         showFastDeliveryOnly: false
       };
+
+    case "SHOW_TOAST":
+      return {
+        ...state,
+        showToast: !state.showToast
+      };
     default:
       return { state };
   }

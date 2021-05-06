@@ -13,7 +13,8 @@ export default function ProductList() {
   const { dispatch: wishDispatch } = useWishList();
   const { sortBy, showInventoryAll, showFastDeliveryOnly } = useProduct();
   const { dispatch: productDispatch } = useProduct();
-
+  const [isSelected, setSelected] = useState(false);
+  const toggle = () => setSelected(!isSelected);
   useEffect(() => {
     (async function () {
       try {
@@ -105,10 +106,16 @@ export default function ProductList() {
                   </div>
                   <i
                     className="fa fa-heart wish-icon"
+                    // className={
+                    //   isSelected
+                    //     ? "fa fa-heart wish-icon wish-icon--selected"
+                    //     : "fa fa-heart wish-icon"
+                    // }
                     aria-hidden="true"
-                    onClick={() =>
-                      wishDispatch({ type: "ADD_TO_WISHLIST", payLoad: data })
-                    }
+                    onClick={() => {
+                      wishDispatch({ type: "ADD_TO_WISHLIST", payLoad: data });
+                      toggle();
+                    }}
                   ></i>
                   <div className="card__desc">
                     <h1>
@@ -128,13 +135,16 @@ export default function ProductList() {
                     <p className="card__details offer">{data.offer}</p>
                     <button
                       className="btn btn--primary btn--cart"
-                      onClick={() =>
-                        cartDispatch({ type: "ADD_TO_CART", payLoad: data })
-                      }
+                      onClick={() => {
+                        cartDispatch({ type: "ADD_TO_CART", payLoad: data });
+                      }}
                     >
                       Add to cart {"   "}
                       <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                     </button>
+                    {}
+
+                    {}
                   </div>
                 </div>
               );

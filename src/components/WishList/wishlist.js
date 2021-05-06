@@ -15,9 +15,7 @@ export const WishList = () => {
         <div className="container__main">
           <div className="card-container">
             {wishList.length === 0 ? (
-              <p className="para--lead">
-                Ahh..Looks like you didn't any items in your wishList{" "}
-              </p>
+              <p className="para--lead">Ahh..Looks like wishlist is empty </p>
             ) : (
               wishList.map(
                 ({
@@ -35,14 +33,6 @@ export const WishList = () => {
                     <div className="card__thumbnail">
                       <img src={image} className="card__img" alt="cardImg" />
                     </div>
-                    <i
-                      className={
-                        isWishSelected
-                          ? "fa fa-heart wish-icon--selected"
-                          : "fa fa-heart wish-icon"
-                      }
-                      aria-hidden="true"
-                    ></i>
                     <div className="card__desc">
                       <h1>
                         <strong>{name}</strong>

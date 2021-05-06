@@ -27,6 +27,15 @@ body {
   align-items: center;
 }
 
+#toast {
+  font-size: medium;
+}
+
+#toast.show {
+  /* right: 35%; */
+  /* top: 5%; */
+}
+
 /* Header */
 .head {
   display: flex;
@@ -149,6 +158,9 @@ body {
   border-radius: 50%;
   background: #e5e7eb;
 }
+.wish-icon:active {
+  color: var(--primary-color);
+}
 
 .card__details {
   font-size: small;
@@ -214,9 +226,9 @@ body {
 }
 
 /* WISHLIST */
-.wish-icon--selected {
+/* .wish-icon--selected {
   color: var(--primary-color);
-}
+} */
 
 .wish-contaniner {
   display: grid;
