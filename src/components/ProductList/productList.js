@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useCart } from "../cartContext";
+import { useCart } from "../cart/cartContext";
 import { Header } from "../header";
-import { useWishList } from "../wishContext";
+import { useWishList } from "../WishList/wishContext";
 import { useProduct } from "./productContext";
 import { getFilteredData } from "../Filter/filter";
 import { getSortedData } from "../Filter/sort";

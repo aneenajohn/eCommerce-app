@@ -46,7 +46,7 @@ body {
   display: grid;
   margin: 0 auto;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
+  grid-gap: 2px;
 }
 
 .container {
@@ -71,8 +71,9 @@ body {
   margin-top: 80px;
   grid-area: aside;
   height: calc(100vh - 50px);
-  overflow-y: auto;
-  overflow-x: clip;
+  /* overflow-y: auto; */
+  /* overflow-x: clip; */
+  overflow: auto;
   position: fixed;
   padding: 1rem;
 }
@@ -87,6 +88,7 @@ body {
   padding: 5rem;
   height: 100vh;
   margin-bottom: 3rem;
+  /* overflow: auto; */
 }
 .card {
   height: inherit;
@@ -215,3 +217,11 @@ body {
 .wish-icon--selected {
   color: var(--primary-color);
 }
+
+.wish-contaniner {
+  display: grid;
+  width: 100%;
+  height: 100%;
+}
+
+/* Mobile screens */

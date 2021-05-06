@@ -1,5 +1,5 @@
 import { useCart } from "./cartContext";
-import { Header } from "./header";
+import { Header } from "../header";
 export const Cart = () => {
   const { itemsInCart, dispatch: cartDispatch } = useCart();
 

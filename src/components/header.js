@@ -1,6 +1,6 @@
-import { useCart } from "./cartContext";
+import { useCart } from "./cart/cartContext";
 import { Link, useLocation } from "react-router-dom";
-import { useWishList } from "./wishContext";
+import { useWishList } from "./WishList/wishContext";
 
 export const Header = () => {
   const { itemsInCart } = useCart();
