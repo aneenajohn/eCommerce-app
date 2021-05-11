@@ -3,11 +3,13 @@ import { Routes, Route } from "react-router-dom";
 import ProductList from "./components/ProductList/productList";
 import { Cart } from "./components/cart/cartList";
 import { WishList } from "./components/WishList/wishlist";
+import { DataLoader } from "./components/DataLoader";
 // import ProductList from "./components/Products";
 
 export default function App() {
   return (
     <div className="App">
+      <DataLoader />
       <Routes>
         <Route path="/" element={<ProductList />} />
         <Route path="/cart" element={<Cart />} />

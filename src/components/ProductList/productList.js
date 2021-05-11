@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { BACKEND_URL } from "../backendUrl";
 import { useCart } from "../cart/cartContext";
 import { Header } from "../header";
 import { useWishList } from "../WishList/wishContext";
 import { useProduct } from "./productContext";
 import { getFilteredData } from "../Filter/filter";
 import { getSortedData } from "../Filter/sort";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ProductList() {
   const [productsData, setProductsData] = useState([]);
@@ -15,12 +18,14 @@ export default function ProductList() {
   const { dispatch: productDispatch } = useProduct();
   const [isSelected, setSelected] = useState(false);
   const toggle = () => setSelected(!isSelected);
+
   useEffect(() => {
     (async function () {
       try {
         const {
           data: { products: dataFromServer }
-        } = await axios.get("/api/products");
+        } = await axios.get(`${BACKEND_URL}products`);
+
         console.log(dataFromServer);
         setProductsData(dataFromServer);
       } catch (err) {
@@ -35,6 +40,43 @@ export default function ProductList() {
     showInventoryAll,
     showFastDeliveryOnly
   );
+  // https://lingokart-api.aneenasam.repl.co/cart
+  const addToCartHandler = async (product) => {
+    try {
+      const item = await axios.post(`${BACKEND_URL}cart`, {
+        _id: product._id,
+        quantity: 1
+      });
+      console.log("posted data", item);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const wishlistHandler = async (product) => {
+    try {
+      const item = await axios.post(`${BACKEND_URL}wishlist`, {
+        _id: product._id,
+        name: product.name,
+        quantity: 1,
+        imageUrl: product.imageUrl,
+        price: product.price,
+        inStock: product.inStock,
+        fastDelivery: product.fastDelivery,
+        ratings: product.ratings,
+        offer: product.offer
+      });
+      console.log("posted data", item);
+      wishDispatch({ type: "ADD_TO_WISHLIST", payLoad: item });
+      toast.success("Added to wishlist", {
+        position: "bottom-left",
+        autoClose: 3000,
+        hideProgressBar: true
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <section className="container">
@@ -89,7 +131,7 @@ export default function ProductList() {
           </label>
         </fieldset>
         <div
-          class="btn btn--primary filter"
+          class="btn btn--primary filter-label"
           onClick={() => productDispatch({ type: "CLEAR_FILTER" })}
         >
           Clear Filter
@@ -100,22 +142,18 @@ export default function ProductList() {
           {filteredData ? (
             filteredData.map((data) => {
               return (
-                <div className="card card--display" key={data.id}>
+                <div className="card card--display" key={data._id}>
                   <div className="card__thumbnail">
-                    <img src={data.image} className="card__img" alt="cardImg" />
+                    <img
+                      src={data.imageUrl}
+                      className="card__img"
+                      alt="cardImg"
+                    />
                   </div>
                   <i
                     className="fa fa-heart wish-icon"
-                    // className={
-                    //   isSelected
-                    //     ? "fa fa-heart wish-icon wish-icon--selected"
-                    //     : "fa fa-heart wish-icon"
-                    // }
                     aria-hidden="true"
-                    onClick={() => {
-                      wishDispatch({ type: "ADD_TO_WISHLIST", payLoad: data });
-                      toggle();
-                    }}
+                    onClick={() => wishlistHandler(data)}
                   ></i>
                   <div className="card__desc">
                     <h1>
@@ -130,14 +168,24 @@ export default function ProductList() {
                       </div>
                     </div>
                     <h2>
-                      <strong>{data.price}</strong>
+                      <strong> ₹ {data.price}</strong>
                     </h2>
+                    <p
+                      className={
+                        data.inStock
+                          ? "stock-details inStock"
+                          : "stock-details outOfStock"
+                      }
+                    >
+                      {data.inStock ? "In Stock" : "Out of stock"}
+                    </p>
                     <p className="card__details offer">{data.offer}</p>
                     <button
                       className="btn btn--primary btn--cart"
-                      onClick={() => {
-                        cartDispatch({ type: "ADD_TO_CART", payLoad: data });
-                      }}
+                      // onClick={() => {
+                      //   cartDispatch({ type: "ADD_TO_CART", payLoad: data._id });
+                      // }}
+                      onClick={() => addToCartHandler(data)}
                     >
                       Add to cart {"   "}
                       <i className="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -146,6 +194,7 @@ export default function ProductList() {
 
                     {}
                   </div>
+                  <ToastContainer />
                 </div>
               );
             })

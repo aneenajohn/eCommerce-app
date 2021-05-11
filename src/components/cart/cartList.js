@@ -1,10 +1,43 @@
 import { useCart } from "./cartContext";
 import { Header } from "../header";
+import { useEffect } from "react";
+import { BACKEND_URL } from "../backendUrl";
+import axios from "axios";
+
 export const Cart = () => {
   const { itemsInCart, dispatch: cartDispatch } = useCart();
 
   const totalReducer = () =>
     itemsInCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+  const cartUpdate = async ({ type, payLoad }) => {
+    // console.log(type, payLoad);
+    // console.log(typeof payLoad);
+    const _id = payLoad;
+    const itemFound = itemsInCart.find((item) => item._id === _id);
+    // console.log(itemFound);
+    let updatedQuantity;
+    if (type === "INCREMENT") {
+      updatedQuantity = itemFound.quantity + 1;
+    } else {
+      updatedQuantity = itemFound.quantity - 1;
+    }
+
+    const { data } = await axios.post(`${BACKEND_URL}cart/${_id}`, {
+      _id: _id,
+      quantity: updatedQuantity
+    });
+    payLoad = {
+      _id: _id,
+      quantity: updatedQuantity
+    };
+    console.log("passing load is", payLoad);
+    if (data.success) {
+      cartDispatch({ type: "UPDATE", payLoad: payLoad });
+    }
+    console.log(data);
+  };
+
   return (
     <section className="cart-container">
       <div>
@@ -44,19 +77,19 @@ export const Cart = () => {
             ) : (
               itemsInCart.map(
                 ({
-                  id,
+                  _id,
                   quantity,
                   name,
-                  image,
+                  imageUrl,
                   price,
                   inStock,
                   fastDelivery,
                   ratings,
                   offer
                 }) => (
-                  <div className="card card--display" Key={id}>
+                  <div className="card card--display" Key={_id}>
                     <div className="card__thumbnail">
-                      <img src={image} className="card__img" alt="cardImg" />
+                      <img src={imageUrl} className="card__img" alt="cardImg" />
                     </div>
                     <i className="fa fa-heart wish-icon" aria-hidden="true"></i>
                     <div className="card__desc">
@@ -78,8 +111,11 @@ export const Cart = () => {
                       <i
                         class="fa fa-plus"
                         aria-hidden="true"
-                        onClick={() =>
-                          cartDispatch({ type: "INCREMENT", payLoad: id })
+                        onClick={
+                          () =>
+                            // cartDispatch({ type: "INCREMENT", payLoad: _id })
+                            cartUpdate({ type: "INCREMENT", payLoad: _id })
+                          // cartUpdate("INCREMENT",_id)
                         }
                       ></i>
                       <div className="card__quantity">{quantity}</div>
@@ -87,13 +123,13 @@ export const Cart = () => {
                         class="fa fa-minus"
                         aria-hidden="true"
                         onClick={() =>
-                          cartDispatch({ type: "DECREMENT", payLoad: id })
+                          cartUpdate({ type: "DECREMENT", payLoad: _id })
                         }
                       ></i>
                       <button
                         className="btn btn--primary  btn--trash"
                         onClick={() =>
-                          cartDispatch({ type: "REMOVE", payLoad: id })
+                          cartDispatch({ type: "REMOVE", payLoad: _id })
                         }
                       >
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
